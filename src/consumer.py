@@ -29,11 +29,7 @@ def main():
             transacao = json.loads(mensagem.value().decode("utf-8"))
             alertas = avaliar(transacao)
             salvar(banco, transacao, alertas)
-            if alertas:
-                titulo = "Fraude: " + ", ".join(alertas)
-            else:
-                titulo = "Transação"
-            exibir(transacao, titulo)
+            exibir(transacao, alertas)
     except KeyboardInterrupt:
         pass
     finally:

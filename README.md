@@ -39,7 +39,7 @@ make consumer
 
 Cada mensagem é inserida na tabela `transacoes` do banco `fraudes`. Para parar, use Ctrl+C.
 
-No console do consumidor, uma transação normal começa com `Transação`. Se alguma regra disparar, a primeira linha é `Fraude:` seguida do nome da regra. A mesma marca fica na coluna `fraudes`.
+No console do consumidor, a primeira linha é o cliente. Uma transação normal termina com `transação`. Se alguma regra disparar, termina com `fraude` e cada regra ganha uma frase embaixo. A mesma marca fica na coluna `fraudes`.
 
 - `ALTO_VALOR`: valor maior ou igual a 10000
 - `TEMPO_60s`: o mesmo cliente com 4 transações em menos de 60 segundos
