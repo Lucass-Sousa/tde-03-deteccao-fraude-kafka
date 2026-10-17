@@ -20,7 +20,7 @@ Para encerrar:
 docker compose down
 ```
 
-## Publicar uma transação fixa
+## Publicar transações
 
 Com o Kafka no ar e as dependências instaladas (`python -m venv .venv && .venv/bin/pip install -r requirements.txt`):
 
@@ -28,14 +28,14 @@ Com o Kafka no ar e as dependências instaladas (`python -m venv .venv && .venv/
 .venv/bin/python producer.py
 ```
 
-O programa envia uma única mensagem para o tópico `transacoes` e termina.
+A cada 3 segundos o produtor sorteia uma transação e publica no tópico `transacoes`. Para parar, use Ctrl+C.
 
-## Ler as transações no console
+## Ler e gravar as transações
 
-Em outro terminal, com o Kafka no ar:
+Em outro terminal:
 
 ```bash
 .venv/bin/python consumer.py
 ```
 
-O consumidor fica esperando. Cada mensagem do tópico `transacoes` aparece no console. Para parar, use Ctrl+C.
+Cada mensagem aparece no console e é inserida na tabela `transacoes` do banco `fraudes`. Para parar, use Ctrl+C.
