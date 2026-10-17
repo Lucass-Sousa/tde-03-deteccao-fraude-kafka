@@ -38,7 +38,7 @@ def main():
                 value=json.dumps(transacao).encode("utf-8"),
             )
             producer.flush()
-            exibir(transacao, "Publicada")
+            exibir(transacao, titulo="Publicada")
             time.sleep(3)
     except KeyboardInterrupt:
         pass
