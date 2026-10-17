@@ -29,3 +29,13 @@ Com o Kafka no ar e as dependências instaladas (`python -m venv .venv && .venv/
 ```
 
 O programa envia uma única mensagem para o tópico `transacoes` e termina.
+
+## Ler as transações no console
+
+Em outro terminal, com o Kafka no ar:
+
+```bash
+.venv/bin/python consumer.py
+```
+
+O consumidor fica esperando. Cada mensagem do tópico `transacoes` aparece no console. Para parar, use Ctrl+C.
