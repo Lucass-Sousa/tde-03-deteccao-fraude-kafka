@@ -7,8 +7,7 @@ Cenário: um produtor publica transações simuladas e um consumidor detecta fra
 Requisito: Docker com o plugin Compose.
 
 ```bash
-docker compose up -d
-docker compose ps
+make up
 ```
 
 - Kafka escuta em `localhost:9092`
@@ -17,7 +16,7 @@ docker compose ps
 Para encerrar:
 
 ```bash
-docker compose down
+make down
 ```
 
 ## Publicar transações
@@ -25,7 +24,7 @@ docker compose down
 Com o Kafka no ar e as dependências instaladas (`python -m venv .venv && .venv/bin/pip install -r requirements.txt`):
 
 ```bash
-.venv/bin/python src/producer.py
+make producer
 ```
 
 A cada 3 segundos o produtor sorteia uma transação e publica no tópico `transacoes`. Para parar, use Ctrl+C.
@@ -35,7 +34,7 @@ A cada 3 segundos o produtor sorteia uma transação e publica no tópico `trans
 Em outro terminal:
 
 ```bash
-.venv/bin/python src/consumer.py
+make consumer
 ```
 
 Cada mensagem é inserida na tabela `transacoes` do banco `fraudes`. Para parar, use Ctrl+C.
