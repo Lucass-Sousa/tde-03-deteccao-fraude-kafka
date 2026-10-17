@@ -19,3 +19,13 @@ Para encerrar:
 ```bash
 docker compose down
 ```
+
+## Publicar uma transação fixa
+
+Com o Kafka no ar e as dependências instaladas (`python -m venv .venv && .venv/bin/pip install -r requirements.txt`):
+
+```bash
+.venv/bin/python producer.py
+```
+
+O programa envia uma única mensagem para o tópico `transacoes` e termina.
