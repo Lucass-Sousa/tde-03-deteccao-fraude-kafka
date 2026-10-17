@@ -25,7 +25,7 @@ docker compose down
 Com o Kafka no ar e as dependências instaladas (`python -m venv .venv && .venv/bin/pip install -r requirements.txt`):
 
 ```bash
-.venv/bin/python producer.py
+.venv/bin/python src/producer.py
 ```
 
 A cada 3 segundos o produtor sorteia uma transação e publica no tópico `transacoes`. Para parar, use Ctrl+C.
@@ -35,7 +35,15 @@ A cada 3 segundos o produtor sorteia uma transação e publica no tópico `trans
 Em outro terminal:
 
 ```bash
-.venv/bin/python consumer.py
+.venv/bin/python src/consumer.py
 ```
 
-Cada mensagem aparece no console e é inserida na tabela `transacoes` do banco `fraudes`. Para parar, use Ctrl+C.
+Cada mensagem é inserida na tabela `transacoes` do banco `fraudes`. Para parar, use Ctrl+C.
+
+No console do consumidor, uma transação normal começa com `Transação`. Se alguma regra disparar, a primeira linha é `Fraude:` seguida do nome da regra. A mesma marca fica na coluna `fraudes`.
+
+- `ALTO_VALOR`: valor maior ou igual a 10000
+- `TEMPO_60s`: o mesmo cliente com 4 transações em menos de 60 segundos
+- `GEO_10m`: o mesmo cliente em duas cidades diferentes dentro de 10 minutos
+
+Para apresentar, suba o consumidor primeiro e o produtor depois. Em cerca de um minuto aparecem os três alertas, porque são poucos clientes e uma mensagem a cada 3 segundos.

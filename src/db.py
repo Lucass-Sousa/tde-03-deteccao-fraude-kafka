@@ -16,15 +16,18 @@ def conectar():
             )
             """
         )
+        cur.execute(
+            "ALTER TABLE transacoes ADD COLUMN IF NOT EXISTS fraudes TEXT"
+        )
     return conn
 
 
-def salvar(conn, transacao):
+def salvar(conn, transacao, fraudes):
     with conn.cursor() as cur:
         cur.execute(
             """
-            INSERT INTO transacoes (id, cliente_id, amount, cidade, timestamp)
-            VALUES (%s, %s, %s, %s, %s)
+            INSERT INTO transacoes (id, cliente_id, amount, cidade, timestamp, fraudes)
+            VALUES (%s, %s, %s, %s, %s, %s)
             ON CONFLICT (id) DO NOTHING
             """,
             (
@@ -33,5 +36,6 @@ def salvar(conn, transacao):
                 transacao["amount"],
                 transacao["cidade"],
                 transacao["timestamp"],
+                ", ".join(fraudes) if fraudes else None,
             ),
         )

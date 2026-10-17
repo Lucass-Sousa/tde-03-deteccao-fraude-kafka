@@ -3,6 +3,8 @@ import json
 from confluent_kafka import Consumer
 
 from db import conectar, salvar
+from exibicao import exibir
+from fraude import avaliar
 
 
 def main():
@@ -25,8 +27,13 @@ def main():
                 print("Erro ao ler:", mensagem.error())
                 continue
             transacao = json.loads(mensagem.value().decode("utf-8"))
-            salvar(banco, transacao)
-            print("Transação:", transacao, flush=True)
+            alertas = avaliar(transacao)
+            salvar(banco, transacao, alertas)
+            if alertas:
+                titulo = "Fraude: " + ", ".join(alertas)
+            else:
+                titulo = "Transação"
+            exibir(transacao, titulo)
     except KeyboardInterrupt:
         pass
     finally:

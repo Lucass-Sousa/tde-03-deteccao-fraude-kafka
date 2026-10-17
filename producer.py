@@ -13,6 +13,7 @@ CIDADES = [
     "Belo Horizonte",
     "Porto Alegre",
 ]
+
 CLIENTES = ["cli-17", "cli-22", "cli-8", "cli-31"]
 
 
